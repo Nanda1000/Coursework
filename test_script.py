@@ -1,27 +1,26 @@
 import requests
 from sklearn.metrics import accuracy_score
 
-# Download the script dynamically
-url = 'https://raw.githubusercontent.com/Nanda1000/Coursework/refs/heads/main/MLchem(3).py?token=GHSAT0AAAAAAC2FRKBHN2ENKDJIXP3KKQM2Z2F6VRA'
+# Download the script dynamically from GitHub
+url = 'https://raw.githubusercontent.com/Nanda1000/Coursework/main/MLchem(3).py'
 response = requests.get(url)
-exec(response.text)  # Load the script into the current Python environment
 
-# Import required functions (assuming your script defines these functions)
-from team_name import fit_preprocess, load_and_preprocess, fit_model, predict
+# Check if the download was successful
+if response.status_code == 200:
+    exec(response.text)  # Dynamically execute the script in the current environment
+else:
+    raise Exception(f"Failed to download script. Status code: {response.status_code}")
 
-# Define train path
+# Define the dataset path
 train_path = r'https://raw.githubusercontent.com/iraola/ML4CE-AD/main/coursework/data/data_train.csv'
 
-# Preprocessing
+# Call the required functions from the loaded script
 preprocess_params = fit_preprocess(train_path)
 X_train, y_train = load_and_preprocess(train_path, preprocess_params)
-
-# Model Training
 model = fit_model(X_train)
-
-# Predictions
 y_train_pred = predict(X_train, model)
 
-# Output Accuracy
-print('Accuracy is: ', accuracy_score(y_train, y_train_pred))
+# Calculate and display accuracy
+print('Accuracy is:', accuracy_score(y_train, y_train_pred))
+
 
