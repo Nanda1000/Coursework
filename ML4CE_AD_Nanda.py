@@ -7,6 +7,14 @@ from sklearn.decomposition import PCA
 from sklearn.preprocessing import StandardScaler
 from sklearn.metrics import accuracy_score, precision_score, recall_score, f1_score
 
+"""
+
+y_true:      True labels for evaluation
+y_pred:      Temporary predicted labels
+final_y_pred: Final predicted labels 
+best_k:      The optimal threshold factor (k)
+"""
+
 
 # Preprocessing Functions
 def fit_preprocess(data_path):
